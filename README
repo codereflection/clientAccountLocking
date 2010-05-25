@@ -1,0 +1,10 @@
+Test in having a singleton manage state for locking
+a client account for processing in a web service.
+
+A client account is just a simple class with an id.
+
+The idea is that only one web service call can process
+a given client account at a time. If a second call to 
+a web service method is made, an exception should be 
+thrown stating that the client account is already locked
+for processing.
