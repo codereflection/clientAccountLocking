@@ -13,16 +13,16 @@ namespace ClientAccountLockingTest
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     [System.Web.Script.Services.ScriptService]
-    public class SearchEngineService : WebService
+    public class MyWebService : WebService
     {
         readonly HttpContextBase _httpContext;
 
-        public SearchEngineService()
+        public MyWebService()
         {
             _httpContext = new HttpContextWrapper(HttpContext.Current);
         }
 
-        public SearchEngineService(HttpContextBase httpContext)
+        public MyWebService(HttpContextBase httpContext)
         {
             _httpContext = httpContext;
         }

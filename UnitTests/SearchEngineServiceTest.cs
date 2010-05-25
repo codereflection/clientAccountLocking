@@ -6,7 +6,7 @@ using Xunit;
 
 namespace UnitTests
 {
-    class SearchEngineServiceTest
+    class MyWebServiceTest
     {
         [Fact]
         public void can_add_a_value_to_the_application_object()
@@ -34,7 +34,7 @@ namespace UnitTests
 
             mockHttpContext.HttpApplicationState.Setup(x => x["ClientAccounts"]).Returns(clientAccountIdList);
 
-            var ses = new SearchEngineService(mockHttpContext.Object);
+            var ses = new MyWebService(mockHttpContext.Object);
 
             Assert.Equal("Client Account Modification Complete", ses.ModifyClientAccount(0));
 
@@ -51,7 +51,7 @@ namespace UnitTests
 
             mockHttpContext.HttpApplicationState.Setup(x => x["ClientAccounts"]).Returns((object x) => clientAccountIdList).AtMost(2);
 
-            var ses = new SearchEngineService(mockHttpContext.Object);
+            var ses = new MyWebService(mockHttpContext.Object);
 
             Assert.Throws<ApplicationException>(() => ses.ModifyClientAccount(clientAccountId));
 
