@@ -71,7 +71,7 @@ namespace ClientAccountLockingTest
 
             LockClientAccount(clientAccountId);
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(10000);
 
             UnLockClientAccount(clientAccountId);
 
