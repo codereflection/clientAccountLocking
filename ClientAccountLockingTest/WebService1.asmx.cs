@@ -27,53 +27,13 @@ namespace ClientAccountLockingTest
             _httpContext = httpContext;
         }
 
-
-        private bool IsClientAccountLocked(int clientAccountId)
-        {
-            if (_httpContext.Application["ClientAccounts"] == null)
-            {
-                return false;
-            }
-            var lockList = (List<int>)_httpContext.Application["ClientAccounts"];
-
-            return lockList.Contains(clientAccountId);
-        }
-
-
-        public bool LockClientAccount(int clientAccountId)
-        {
-            if (_httpContext.Application["ClientAccounts"] == null)
-            {
-                _httpContext.Application.Add("ClientAccounts", new List<int>());
-            }
-            var lockList = (List<int>)_httpContext.Application["ClientAccounts"];
-
-            lockList.Add(clientAccountId);
-
-            return true;
-        }
-
-
-        private void UnLockClientAccount(int clientAccountId)
-        {
-            var lockList = (List<int>)_httpContext.Application["ClientAccounts"];
-
-            lockList.Remove(clientAccountId);
-        }
-
         [WebMethod]
         public string ModifyClientAccount(int clientAccountId)
         {
-            if (IsClientAccountLocked(clientAccountId) == true)
+            using (var clientAccountLock = new ClientAccountLock(clientAccountId))
             {
-                throw new ApplicationException(String.Format("ClientAccountID {0} is currently in use", clientAccountId));
+                System.Threading.Thread.Sleep(10000);
             }
-
-            LockClientAccount(clientAccountId);
-
-            System.Threading.Thread.Sleep(10000);
-
-            UnLockClientAccount(clientAccountId);
 
             return "Client Account Modification Complete";
         }

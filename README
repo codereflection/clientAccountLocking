@@ -8,3 +8,16 @@ a given client account at a time. If a second call to
 a web service method is made, an exception should be 
 thrown stating that the client account is already locked
 for processing.
+
+To see the client account lock working, invoke the 
+ModifyClientAccount method twice on WebService1 with
+the same id. The second call will throw an exception
+stating that the client account is already locked, while
+the first request processes for 10 seconds.
+
+Syntax:
+
+using (var lockedClientAccount = new ClientAccountLock(123))
+{
+	// work with the client account here
+}
