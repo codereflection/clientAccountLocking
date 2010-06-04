@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientAccount.cs" />
+    <Compile Include="ClientAccountLock.cs" />
     <Compile Include="ClientAccountProcessing.asmx.cs">
       <DependentUpon>ClientAccountProcessing.asmx</DependentUpon>
       <SubType>Component</SubType>

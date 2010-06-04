@@ -178,6 +178,48 @@ namespace UnitTests
 
     }
 
+    public class ClientAccountLockTests
+    {
+        public class when_locking_a_clientaccount_with_the_using_statement
+        {
+            [Fact]
+            public void the_client_account_should_be_locked_during_and_unlocked_after()
+            {
+                StateManager.ResetStateManager();
+
+                using (var lockedClientAccount = new ClientAccountLock(123))
+                {
+                    Assert.NotNull(lockedClientAccount);
+
+                    Assert.True(StateManager.IsClientAccountIDLocked(lockedClientAccount.ClientAccountId));
+
+                    var newLock = new LockedClientAccount { ClientAccountId = 123, MethodCalled = "Test" };
+
+                    Assert.Throws<ArgumentException>(() => StateManager.LockClientAccount(newLock));
+                }
+
+                Assert.False(StateManager.IsClientAccountIDLocked(123));
+            }
+        }
+
+
+        public class when_trying_to_lock_a_client_account_that_has_been_locked
+        {
+            [Fact]
+            public void an_exception_should_be_throw()
+            {
+                StateManager.ResetStateManager();
+
+                var lockedClientAccount = new LockedClientAccount { ClientAccountId = 123, MethodCalled = "test" };
+
+                StateManager.LockClientAccount(lockedClientAccount);
+
+                var newClientAccountLockRequest = new LockedClientAccount { ClientAccountId = 123, MethodCalled = "test" };
+
+                Assert.Throws<ArgumentException>(() => StateManager.LockClientAccount(newClientAccountLockRequest));
+            }
+        }
+    }
 }
 
 
