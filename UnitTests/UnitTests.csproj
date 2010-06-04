@@ -31,15 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\..\..\..\..\..\..\OSS\moq-contrib\Source\bin\Debug\Autofac.dll</HintPath>
-    </Reference>
     <Reference Include="Moq, Version=4.0.812.4, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\OSS\moq-contrib\Source\bin\Debug\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Moq.Contrib">
-      <HintPath>..\..\..\..\..\..\..\OSS\moq-contrib\Source\bin\Debug\Moq.Contrib.dll</HintPath>
+    <Reference Include="Moq.Contrib, Version=0.1.3211.31914, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Moq.Contrib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -66,6 +64,11 @@
       <Project>{7A3831F4-A63D-479F-9877-0E2C4BF5FF92}</Project>
       <Name>ClientAccountLockingTest</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\Moq.Contrib.dll" />
+    <Content Include="lib\Moq.dll" />
+    <Content Include="lib\xunit.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
